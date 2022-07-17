@@ -48,7 +48,7 @@
 \begin{landscape}
     \thispagestyle{empty}
 
-    \begin{multicols}{4}
+    \begin{multicols}{3}
         %
         %   Grundlagen
         %
@@ -78,7 +78,7 @@
         \end{itemize}
         \begin{Figure}
             \centering
-            \includegraphics[width=\linewidth]{bv_tradeoff.png}
+            \includegraphics[width=0.75\linewidth]{bv_tradeoff.png}
         \end{Figure}
 
 
@@ -98,7 +98,7 @@
                 \end{itemize}
                 \item $RSS = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2$
                 \item $RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}$ (Zielgröße weicht im Durchschnitt RSE Einheiten von der Regressionsgeraden ab)
-                \item $R^2 = 1 - \frac{RSS}{TSS}$, je größer desto besser $0 <= R^2 <= 1$ (Var(Zielwert) wird durch $R^2\%$ der Prädiktoren erklärt)
+                \item $R^2 = 1 - \frac{RSS}{TSS}$, je größer desto besser $0 \leq R^2 \leq 1$ (Var(Zielwert) wird durch $R^2\%$ der Prädiktoren erklärt)
                 \item $R^2_{adj} = 1- \frac{(1-R^2)(N-1)}{N-p-1}$ Adjustiert mit Anzahl der Prädiktoren
                 \item Standardfehler und Intervalle
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
@@ -107,24 +107,30 @@
                     \item $(SE(\hat{\beta}_1))^2 = \frac{Var(\epsilon)}{\sum_{i=1}^{n}(x_i-\overline{x})^2}$
                     \item Intervallschätzung: $[\hat{\beta}_1-2*SE(\hat{\beta}_1), \hat{\beta}_1+2*SE(\hat{\beta}_1)]$
                     \item Interpret: Aus 100 Proben liegt $ \beta_1$ in 95 Fällen im Interval
+                    \item 95\%-Konfidenzinterval: bezieht sich auf den durchschnittlichen Y Wert
+                    \item 95\%-Prognoseinterval: bezieht sich auf den konkreten Wert Y von Ausgangswerten X1\dots
                 \end{itemize}
                 \item t-Test
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-                    \item 
+                    \item $H_0: \beta_0 = 0; H_1: \beta_1 \neq 0$
+                    \item $X_1$ Hat keinen Einfluss auf Y
+                    \item $t = \frac{\hat{\beta_1}}{SE(\hat{\beta_1})}$
+                    \item Einfach den p-Wert ablesen, wenn < als bspw. 0.05 dann $H_0$ verwerfen
                 \end{itemize}
                 \item F-Test
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-                    \item 
+                    \item $H_0: \beta_0 = \beta_1 = ... = 0$
+                    \item Alle Prädiktoren haben keinen Einfluss auf Y
                 \end{itemize}
             \end{itemize}
             \item Qualitative Prädiktoren:
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-                \item \textbf{Prädikatoren mit 2 Ausprägungen:}
+                \item \textbf{Prädiktoren mit 2 Ausprägungen:}
                 \item DummyVariable aka 0(No) oder 1 (Yes)
                 \item \textcolor{red}{Achte auf Normalausprägung von R}
                 \item $\hat{y} = \beta_0 + \beta_1*x_i $
                 \item Koeffizient $\beta_1$ kürzt sich je nach Ausprägung raus
-                \item \textbf{Prädikatoren mit $k$ Ausprägungen:}
+                \item \textbf{Prädiktoren mit $k$ Ausprägungen:}
                 \item Erstelle $k-1$ Dummyvariablen
                 \item Andere ist Normalzustand
             \end{itemize}
@@ -147,28 +153,90 @@
         %   Klassifikation
         %
         \section{Klassifikation}
+        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \item \textbf{Grundlagen:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Klassifikation ist Zuordnung von bedingten Wahrscheinlichkeiten anhand von Ausprägungen
+                \item $P(Y = k | X=x)$
+                \item Klasse mit höchster Wahrscheinlichkeit wird gewählt
+                \item Bpsw: Y = 1 (Yes) und 0 (No)
+                \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                    \item Lineare Regression, die die Wahrscheinlichkeitausgibt \textcolor{red}{funktioniert nicht!}
+                    \item Reg.Gerade wird unter 0 fitten und auch nicht bis 1
+                \end{itemize}
+                \item Funktion finden, die $0 \leq p(x) \leq 1$ für alle X
+            \end{itemize}
+            \item \textbf{Logistic Regression:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item $p(x) = \frac{e^{\beta_0+\beta_1*X}}{1+e^{\beta_0+\beta_1*X}}$
+                \item $0 \leq p(x) \leq 1$, da immer $e^x \geq 0$ und $\frac{X}{1+X}\leq 1$
+                \item Odds:
+                \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                    \item $\frac{p(x)}{1-(px)}= e^{\beta_0+\beta_1*X}$
+                    \item $0 \leq odds \leq \infty$
+                    \item Möglichkeit Wahrscheinlichkeit anzugeben:
+                    \item Odds= $\frac{4}{3}$ -> "Siegchancen stehen 4 zu 3"
+                    \item Umrechnung:
+                    \item $p = \frac{odds}{1+odds} = \frac{e^{logit}}{1+e^{logit}}$
+                    \item $odds = \frac{p}{1-p} = e^{logit}$
+                \end{itemize}
+                \item Logits:
+                \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                    \item $log(\frac{p(x)}{1-(px)})= \beta_0+\beta_1*X$
+                    \item $-\infty \leq logits \leq \infty$
+                    \item Logits hängen Linear von X ab
+                \end{itemize}
+            \end{itemize}
+            \item \textbf{Schätzung der Koeffizienten}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Schätzung von $\beta_0$ und $\beta_1$ über Maximum-Likelihood
+                \item $l(\beta_0, \beta_1)= \Pi_{i:y_i=1} p(x_i) * \Pi_{i:y_i=0} (1-p(x_i)) $
+                \item Funktion wird maximiert = da wo Likelihood am größten ist, sind Parameter am besten
+            \end{itemize}
+            \item \textbf{Validierung:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Gleiche Werte/ Tests, wie bei lineare Regression
+            \end{itemize}
+            \item \textbf{Confounding:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Zusammenhang zwischen zwei Prädiktoren
+                \item Confounder beeinflusst gleichzeitig Zielgröße und anderen Prädiktor
+                \item \textcolor{red}{Hier fehlts}
+            \end{itemize}
+        \end{itemize}
+
+
+        %
+        %   Resampling
+        %
         \section{Resampling}
         \section{Modellauswahl}
         \section{R - Hilfe}
         \begin{itemize} [noitemsep,nolistsep,leftmargin=*]
-            \item $set.seed(X)$ Setzt Seed für random Number Generator
-            \item $c(1,2,3,4)$ Vektor mit Zahlen 1-4
-            \item $df[2,3]$ Greift auf Element der 2.Reihe und 3.Spalte des DFs zu
-            \item $df[,-3]$ Entfernt 3. Spalte
-            \item $head()$ Zeigt erste X Zeilen von DF an
-            \item $summary()$ gibt Zusammenfassung von Modellen (DF, Modelle etc.)
+            \item \textbf{Grundlagen:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item $set.seed(X)$ Setzt Seed für random Number Generator
+                \item $c(1,2,3,4)$ Vektor mit Zahlen 1-4
+                \item $df[2,3]$ Greift auf Element der 2.Reihe und 3.Spalte des DFs zu
+                \item $df[,-3]$ Entfernt 3. Spalte
+                \item $head()$ Zeigt erste X Zeilen von DF an
+                \item $summary()$ gibt Zusammenfassung von Modellen (DF, Modelle etc.)
+                \item $table(X,Y)$ gibt Tabelle bzw. Konfusionsmatrix aus
+            \end{itemize}
 
             \item \textbf{Modelle:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-            \item $lm(A ~ B + poly(C,2) + BC)$ Lineare Regression für A mit Interaktivität von BC und C mit Exponent 2
+            \item $lm(A ~ B + poly(C,2) + BC, data = \dots)$ Lineare Regression für A mit Interaktivität von BC und C mit Exponent 2
+            \item $glm(A ~ B + C, data=\dots, family = binomial)$ Logistic Regression Modell
             \item $predict(Modell, DataFrame, interval= , type= )$
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                     \item DF: $data.frame(x1 = c(2), x2 = c(3))$ 
                     \item $interval$ Konfidenzinterval(confidence), Prognoseinterval(prediction)
-                    \item $type$ \textcolor{red}{OFFEN!}
+                    \item $type$ Wahrscheinlichkeit(response), Loggits(ohne Angabe)
                 \end{itemize}
             \item $coef()$ Zeigt Koeffizienten des Modells
             \item $confint()$Zeigt  Konfidenzintervalle für Koeff.
+            \item $chisq.test(X,Y)$ Macht ChiquadratTest auf Unabhängigkeit von X und Y ($H_0$: Merkmale sind unabhängig)
             \end{itemize}
 
             \item \textbf{Plots:}
