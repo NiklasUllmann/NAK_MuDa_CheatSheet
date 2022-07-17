@@ -94,6 +94,27 @@
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                     \item $\beta_1 = \frac{\sum_{i=1}^{n}(x_i-\overline{x})*(y_i-\overline{y})}{\sum_{i=1}^{n}(x_1-\overline{x})^2}$ 
                     \item $\beta_0 = \overline{y} - \beta_1\overline{x}$
+                    \item Erwartungstreue: $E(\hat{\beta}_0) = \beta_0$ und $E(\hat{\beta}_1) = \beta_1$
+                \end{itemize}
+                \item $RSS = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2$
+                \item $RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}$ (Zielgröße weicht im Durchschnitt RSE Einheiten von der Regressionsgeraden ab)
+                \item $R^2 = 1 - \frac{RSS}{TSS}$, je größer desto besser $0 <= R^2 <= 1$ (Var(Zielwert) wird durch $R^2\%$ der Prädiktoren erklärt)
+                \item $R^2_{adj} = 1- \frac{(1-R^2)(N-1)}{N-p-1}$ Adjustiert mit Anzahl der Prädiktoren
+                \item Standardfehler und Intervalle
+                \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                    \item $Var(\epsilon)=\frac{1}{n-2}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2$
+                    \item $(SE(\hat{\beta}_0))^2 = Var(\epsilon)*(\frac{1}{n}+\frac{\overline{x}^2}{\sum_{i=1}^{n}(x_i-\overline{x})^2})$
+                    \item $(SE(\hat{\beta}_1))^2 = \frac{Var(\epsilon)}{\sum_{i=1}^{n}(x_i-\overline{x})^2}$
+                    \item Intervallschätzung: $[\hat{\beta}_1-2*SE(\hat{\beta}_1), \hat{\beta}_1+2*SE(\hat{\beta}_1)]$
+                    \item Interpret: Aus 100 Proben liegt $ \beta_1$ in 95 Fällen im Interval
+                \end{itemize}
+                \item t-Test
+                \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                    \item 
+                \end{itemize}
+                \item F-Test
+                \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                    \item 
                 \end{itemize}
             \end{itemize}
             \item Qualitative Prädiktoren:
