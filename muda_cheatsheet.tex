@@ -252,6 +252,46 @@
         %   Modellauswahl
         %
         \section{Modellauswahl}
+        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \item p (\# Prädiktoren), n (\# Beobachtungen)
+            \item Steigende Varianz und sinkender Prognosegüte, wenn p -> n
+            \item Hohe Anzahl an Prädiktoren: Steigende Wahrscheinlichkeit von Multikollinearitär (Abhängige Prädiktoren) und unnötige Komplexität
+            \item Wenn $p \geq n $, ist Methode der kleinsten Quadrate gar nicht möglich
+            \item \textbf{Best Subset Selection:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Berechne alle Modelle mit k Parametern (Speicher das beste (Min. RSS oder Max. $R^2$))
+                \item Berechne für k = 0,1,2 .. x alle besten Modelle
+                \item Wähle beste aus Besten aus (siehe unten)
+                \item Hoher Rechenaufwand ($2^p$ Modelle), Gefahr von Overfitting, findet optimales Modell
+            \end{itemize} 
+            \item \textbf{Forward Stepwise Selection:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Berechne bestes Modell mit 0 Prädiktoren, dann mit 1, etc.
+                \item Wähle für k immer das beste Modell und gehe von dort aus weiter
+                \item Wähle beste aus Besten aus
+                \item Weniger Rechenaufwand ($p^2$ Modelle), Overfitting unwahrscheinlich, findet nur lokales Optimum
+            \end{itemize}
+            \item \textbf{Backward Stepwise Selection:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Wie Forward Stepwise Selection nur rückwärts
+                \item Starte mit Modell mit k Prädiktoren und nimm immer den schlechtesten Weg
+                \item Wähle beste aus Besten aus
+                \item Weniger Rechenaufwand ($p^2$ Modelle), Overfitting unwahrscheinlich, findet nur lokales Optimum
+            \end{itemize}
+            \item \textbf{Bestes Modell?}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item $R^2$ und $RSS$ ist nicht aussagekräftig, da es mit steigender Anzahl an Prädiktoren besser wird. 
+                \item Testfehler indirekt messbar durch ($C_p, AIC, BIC und R^2_{adj}$) oder direkt durch Kreuzvalidierung
+                \item Anwendbar bei linearen Modellen
+                \item $RSS = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2$
+                \item n: Anzahl der Beobachtungen, d: Anzahl der Prädiktoren
+                \item $\sigma^2 = Var(\epsilon) = \frac{1}{n-p-1}*RSS$  
+                \item Mallows $C_p = \frac{1}{n}(RSS + 2d\sigma^2)$
+                \item $AIC = \frac{1}{n\sigma^2}(RSS + 2d\sigma^2)$ (Proportional zu $C_p$)
+                \item $BIC = \frac{1}{n\sigma^2}(RSS + ln(n)d\sigma^2)$ (Höheres Gewicht auf Strafterm für viel Prädiktoren)
+                \item $R^2_a = R^2 - \frac{p}{n-p-1}(1-R^2)$ kann bei Hinzunahme einer Variable auch kleiner und oder negativ werden
+            \end{itemize}
+        \end{itemize}
 
 
 
