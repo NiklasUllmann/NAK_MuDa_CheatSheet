@@ -210,7 +210,54 @@
         %   Resampling
         %
         \section{Resampling}
+        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \item \textbf{Grundlagen:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item TestError wird mit ungesehenen Daten berechnet.
+                \item Meist aber keine vorhanden -> TestError muss über Trainingsdaten geschätzt werden
+                \item Verfahren für Regression/Klassifikation anwendbar
+            \end{itemize}
+            \item \textbf{Einfache Valididerung:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Teile Trainingsdaten in zwei gleiche große Mengen auf
+                \item Menge1: für Training / Menge2: für Testing
+                \item MSE variiert stark in Abhängikeit der Traininsgmenge
+                \item Modelle sollten möglichst mit hoher Trainingsmenge trainiert werden
+                \item Hoher Bias, geringe Varianz
+            \end{itemize}
+            \item \textbf{LeaveOneOut Validierung:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item n-Modelle werden mit n-1 Datensätze trainiert
+                \item Letzter Datensatz ist Testdatensatz
+                \item Durchschnitt aller MSEs ist finaler Wert
+                \item $CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i$
+                \item Vorteil: Größere Trainingsmenge
+                \item Nachteil: Hoher Rechenaufwand für n Modelle, größere Varianz als bei einfacher Val, durch Autokorrelation
+                \item geringer Bias, hohe Varianz
+            \end{itemize}
+            \item \textbf{k-fold Validierung}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Teile Datensatz in k gleich große Mengen (5, 10..)
+                \item Trainiere k Modelle, wobei immer eine Teilmenge als Test genutzt wird
+                \item $CV_{(k)} = \frac{1}{k}\sum_{i=1}^k MSE_i$
+                \item geringere Streuung des MSEs
+                \item Guter Kompromiss zwischen Rechenaufwand und guter Abschätzung
+            \end{itemize}
+            \item Für Klassifikation wird der Anteil falsch klassifizierter Objekte genommen!
+        \end{itemize}
+
+
+
+        %
+        %   Modellauswahl
+        %
         \section{Modellauswahl}
+
+
+
+        %
+        %   R-Hilfe
+        %
         \section{R - Hilfe}
         \begin{itemize} [noitemsep,nolistsep,leftmargin=*]
             \item \textbf{Grundlagen:}
@@ -222,12 +269,14 @@
                 \item $head()$ Zeigt erste X Zeilen von DF an
                 \item $summary()$ gibt Zusammenfassung von Modellen (DF, Modelle etc.)
                 \item $table(X,Y)$ gibt Tabelle bzw. Konfusionsmatrix aus
+                \item $nrow(X)$ gibt Anzahl der Zeilen in X
+                \item $sample(n, n/2)$ gibt 50\% Subsetvektor
             \end{itemize}
 
             \item \textbf{Modelle:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-            \item $lm(A ~ B + poly(C,2) + BC, data = \dots)$ Lineare Regression für A mit Interaktivität von BC und C mit Exponent 2
-            \item $glm(A ~ B + C, data=\dots, family = binomial)$ Logistic Regression Modell
+            \item $lm(A ~ B + poly(C,2) + BC, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von BC und C mit Exponent 2
+            \item $glm(A ~ B + C, data=\dots, family = binomial, subset=)$ Logistic Regression Modell
             \item $predict(Modell, DataFrame, interval= , type= )$
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                     \item DF: $data.frame(x1 = c(2), x2 = c(3))$ 
@@ -239,12 +288,20 @@
             \item $chisq.test(X,Y)$ Macht ChiquadratTest auf Unabhängigkeit von X und Y ($H_0$: Merkmale sind unabhängig)
             \end{itemize}
 
+            \item \textbf{Validierung:}
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item $mean((Auto\$mpg - predict(lm.fit2, Auto))[-train]^2) $Berechnet die mittlere quadratische Abweichung
+                \item aus dem $boot$ package
+                \item $cv.glm(Data,Modell)\$delta[1]$ LeaveOneOut (\$delta[1] liefert nur ersten Wert also MSE)
+                \item $cv.glm(Data,Modell, k=X)\$delta[1]$ k-fold mit k Folds
+            \end{itemize}
+
             \item \textbf{Plots:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item $pairs()$ Zeigt Pärchenplott aller qantitativer Variabeln
                 \item $plot()$ Zeigt X/Y Plot zweier Variablen
                 \item $abline(Modell, col="red")$ Zeigt Regressionslinie
-                \item $qplot()$ aus ggplot2 für quickplot
+                \item $qplot()$ aus $ggplot2$ für quickplot
             \end{itemize}
         \end{itemize}
     
