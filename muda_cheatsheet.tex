@@ -304,6 +304,9 @@
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item $set.seed(X)$ Setzt Seed für random Number Generator
                 \item $c(1,2,3,4)$ Vektor mit Zahlen 1-4
+                \item $rep(1:10, 100)$ Erzeugt Vektor mit zahlen 1-10, 100 mal
+                \item $rnorm(100)$ Erzeugt Vektor mit 100 normalverteilten Werten
+                \item $runif(X, a,b)$Erzeugt X Zufallszahlen zwischen a und b
                 \item $df[2,3]$ Greift auf Element der 2.Reihe und 3.Spalte des DFs zu
                 \item $df[,-3]$ Entfernt 3. Spalte
                 \item $head()$ Zeigt erste X Zeilen von DF an
@@ -311,6 +314,8 @@
                 \item $table(X,Y)$ gibt Tabelle bzw. Konfusionsmatrix aus
                 \item $nrow(X)$ gibt Anzahl der Zeilen in X
                 \item $sample(n, n/2)$ gibt 50\% Subsetvektor
+                \item $is.na(X)$ findet/zählt null Values
+                \item $na.omit(X)$ entfernt null Values
             \end{itemize}
 
             \item \textbf{Modelle:}
@@ -334,12 +339,15 @@
                 \item aus dem $boot$ package
                 \item $cv.glm(Data,Modell)\$delta[1]$ LeaveOneOut (\$delta[1] liefert nur ersten Wert also MSE)
                 \item $cv.glm(Data,Modell, k=X)\$delta[1]$ k-fold mit k Folds
+                \item $regsubsets(Y ~ ., data = , nvmax =, method = )$ SubsetSelection (nvmax = Anzahl Attribute, methode= forward/backward/none)
             \end{itemize}
 
             \item \textbf{Plots:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item $pairs()$ Zeigt Pärchenplott aller qantitativer Variabeln
                 \item $plot()$ Zeigt X/Y Plot zweier Variablen
+                \item $hist()$ Zeigt Histogram
+                \item $points()$ Erzeugt Punkt im Plot
                 \item $abline(Modell, col="red")$ Zeigt Regressionslinie
                 \item $qplot()$ aus $ggplot2$ für quickplot
             \end{itemize}
