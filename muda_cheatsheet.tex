@@ -6,7 +6,7 @@
 \usepackage{color}
 \usepackage{enumitem}
 
-\usepackage[left=10mm, right=10mm, top=10mm, bottom=10mm]{geometry}
+\usepackage[left=5mm, right=5mm, top=5mm, bottom=5mm]{geometry}
 
 \usepackage{titlesec}
 
@@ -48,7 +48,7 @@
 \begin{landscape}
     \thispagestyle{empty}
 
-    \begin{multicols}{4}
+    \begin{multicols}{3}
         %
         %   Grundlagen
         %
@@ -336,7 +336,7 @@
 
             \item \textbf{Validierung:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-                \item $mean((Auto\$mpg - predict(lm.fit2, Auto))[-train]^2) $Berechnet die mittlere quadratische Abweichung
+                \item $mean((Auto\$mpg - predict(lm.fit2, Auto))[-train]^2)$ Berechnet die mittlere quadratische Abweichung
                 \item aus dem $boot$ package
                 \item $cv.glm(Data,Modell)\$delta[1]$ LeaveOneOut (\$delta[1] liefert nur ersten Wert also MSE)
                 \item $cv.glm(Data,Modell, k=X)\$delta[1]$ k-fold mit k Folds
