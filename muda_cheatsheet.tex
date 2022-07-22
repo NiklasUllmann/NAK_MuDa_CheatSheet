@@ -338,7 +338,7 @@
             \item \textbf{Validierung:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item $mean((Auto\$mpg - predict(lm.fit2, Auto))[-train]^2)$ Berechnet die mittlere quadratische Abweichung
-                \item $Bei Klassifikation vorher Wahrscheinlichkeiten umwandeln in Quali-Werte$
+                \item Bei Klassifikation vorher Wahrscheinlichkeiten umwandeln in Quali-Werte
                 \item aus dem $boot$ package
                 \item $cv.glm(Data,Modell)\$delta[1]$ LeaveOneOut (\$delta[1] liefert nur ersten Wert also MSE)
                 \item $cv.glm(Data,Modell, k=X)\$delta[1]$ k-fold mit k Folds
@@ -348,7 +348,7 @@
             \item \textbf{Plots:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item $par(mfrow = c(2, 2))$ Zeigt 2x2 Matrix mit Plots
-                \item $pairs()$ Zeigt Pärchenplott aller qantitativer Variabeln
+                \item $pairs()$ Zeigt Pärchenplott aller quantitativer Variabeln
                 \item $plot(x,y, xlab=, ylab=)$ Zeigt X/Y Plot zweier Variablen mit Achsenbeschriftung
                 \item $plot(modell)$ Zeigt Plots zu Residuen etc.
                 \item $hist()$ Zeigt Histogram
