@@ -92,8 +92,8 @@
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item Schätzung der Parameter $\beta_0 und \beta_1$ über kleinste Quadrate
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-                    \item $\beta_1 = \frac{\sum_{i=1}^{n}(x_i-\overline{x})*(y_i-\overline{y})}{\sum_{i=1}^{n}(x_1-\overline{x})^2}$ 
-                    \item $\beta_0 = \overline{y} - \beta_1\overline{x}$
+                    \item $\hat{\beta_1} = \frac{\sum_{i=1}^{n}(x_i-\overline{x})*(y_i-\overline{y})}{\sum_{i=1}^{n}(x_1-\overline{x})^2}$ 
+                    \item $\hat{\beta_0} = \overline{y} - \beta_1\overline{x}$
                     \item Erwartungstreue: $E(\hat{\beta}_0) = \beta_0$ und $E(\hat{\beta}_1) = \beta_1$
                 \end{itemize}
                 \item $RSS = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2$
@@ -120,6 +120,7 @@
                 \item F-Test
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                     \item $H_0: \beta_0 = \beta_1 = ... = 0$
+                    \item $F =\frac{(TSS-RSS)/p}{RSS/(n-p-1)}$
                     \item Alle Prädiktoren haben keinen Einfluss auf Y
                 \end{itemize}
             \end{itemize}
@@ -222,6 +223,7 @@
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item Teile Trainingsdaten in zwei gleiche große Mengen auf
                 \item Menge1: für Training / Menge2: für Testing
+                \item $MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$
                 \item MSE variiert stark in Abhängikeit der Traininsgmenge
                 \item Modelle sollten möglichst mit hoher Trainingsmenge trainiert werden
                 \item Hoher Bias, geringe Varianz
@@ -231,7 +233,7 @@
                 \item n-Modelle werden mit n-1 Datensätze trainiert
                 \item Letzter Datensatz ist Testdatensatz
                 \item Durchschnitt aller MSEs ist finaler Wert
-                \item $CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i$
+                \item $CV_{(n)} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2$
                 \item Vorteil: Größere Trainingsmenge
                 \item Nachteil: Hoher Rechenaufwand für n Modelle, größere Varianz als bei einfacher Val, durch Autokorrelation
                 \item geringer Bias, hohe Varianz
@@ -240,7 +242,7 @@
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item Teile Datensatz in k gleich große Mengen (5, 10..)
                 \item Trainiere k Modelle, wobei immer eine Teilmenge als Test genutzt wird
-                \item $CV_{(k)} = \frac{1}{k}\sum_{i=1}^k MSE_i$
+                \item $CV_{(k)} = \frac{1}{k}\sum_{i=1}^k (y_i - \hat{y}_i)^2$
                 \item geringere Streuung des MSEs
                 \item Guter Kompromiss zwischen Rechenaufwand und guter Abschätzung
             \end{itemize}
