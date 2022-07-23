@@ -242,7 +242,7 @@
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                 \item Teile Datensatz in k gleich große Mengen (5, 10..)
                 \item Trainiere k Modelle, wobei immer eine Teilmenge als Test genutzt wird
-                \item $CV_{(k)} = \frac{1}{k}\sum_{i=1}^k (y_i - \hat{y}_i)^2$
+                \item $CV_{(k)} = \frac{1}{k}\sum_{i=1}^k \frac{1}{n}\sum_{j=1}^{n}(y_j - \hat{y}_j)^2$
                 \item geringere Streuung des MSEs
                 \item Guter Kompromiss zwischen Rechenaufwand und guter Abschätzung
             \end{itemize}
