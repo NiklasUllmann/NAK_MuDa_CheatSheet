@@ -324,7 +324,7 @@
 
             \item \textbf{Modelle:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-            \item $lm(A ~ B + poly(C,2) + BC, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von BC und C mit Exponent 2
+            \item $lm(A ~  poly(C,2) + A:B, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von BC und C mit Exponent 2
             \item $glm(A ~ B + C, data=\dots, family = binomial, subset=)$ Logistic Regression Modell
             \item $predict(Modell, DataFrame, interval= , type= )$
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
@@ -339,7 +339,7 @@
 
             \item \textbf{Validierung:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-                \item $mean((Auto\$mpg - predict(lm.fit2, Auto))[-train]^2)$ Berechnet die mittlere quadratische Abweichung
+                \item $mean((pred_true - predict(Modell, Datenatz))[-train]^2)$ Berechnet die mittlere quadratische Abweichung
                 \item Bei Klassifikation vorher Wahrscheinlichkeiten umwandeln in Quali-Werte
                 \item aus dem $boot$ package
                 \item $cv.glm(Data,Modell)\$delta[1]$ LeaveOneOut (\$delta[1] liefert nur ersten Wert also MSE)
