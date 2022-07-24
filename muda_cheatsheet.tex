@@ -324,8 +324,8 @@
 
             \item \textbf{Modelle:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-            \item $lm(A ~  poly(C,2) + B:D, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von BD und C mit Exponent 2
-            \item $glm(A ~ B + C, data=\dots, family = binomial, subset=)$ Logistic Regression Modell
+            \item $lm(A \sim  poly(C,2) + B:D, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von BD und C mit Exponent 2
+            \item $glm(A \sim B + C, data=\dots, family = binomial, subset=)$ Logistic Regression Modell
             \item $predict(Modell, DataFrame, interval= , type= )$
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
                     \item DF: $data.frame(x1 = c(2), x2 = c(3))$ 
@@ -344,7 +344,7 @@
                 \item aus dem $boot$ package
                 \item $cv.glm(Data,Modell)\$delta[1]$ LeaveOneOut (\$delta[1] liefert nur ersten Wert also MSE)
                 \item $cv.glm(Data,Modell, k=X)\$delta[1]$ k-fold mit k Folds
-                \item $regsubsets(Y ~ ., data = , nvmax =, method = )$ SubsetSelection (nvmax = Anzahl Attribute, methode= forward/backward/none)
+                \item $regsubsets(Y \sim ., data = , nvmax =, method = )$ SubsetSelection (nvmax = Anzahl Attribute, methode= forward/backward/none)
             \end{itemize}
 
             \item \textbf{Plots:}
