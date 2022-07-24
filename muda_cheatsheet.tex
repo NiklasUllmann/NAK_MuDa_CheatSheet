@@ -324,7 +324,7 @@
 
             \item \textbf{Modelle:}
             \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
-            \item $lm(A \sim  poly(C,2) + B:D, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von BD und C mit Exponent 2
+            \item $lm(A \sim  poly(C,2) + B*D, data = \dots, subset=)$ Lineare Regression für A mit Interaktivität von B*D (* nimmt einzelne Werte auch mit rein; : nur Interaktionsterm) und C mit Exponent 2
             \item $glm(A \sim B + C, data=\dots, family = binomial, subset=)$ Logistic Regression Modell
             \item $predict(Modell, DataFrame, interval= , type= )$
                 \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
